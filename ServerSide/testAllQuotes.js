@@ -37,4 +37,4 @@ if (res03.search("indicate where smiles have been") > -1){
 }
 
 //added log fail
-logFail("T04")
+throw 'test exception'
