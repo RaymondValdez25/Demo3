@@ -42,4 +42,5 @@ if (res04.search("yadda yadda") > -1){
 } else {
     logFail("T04");
     throw 'test error code'
+    //hello
 }
