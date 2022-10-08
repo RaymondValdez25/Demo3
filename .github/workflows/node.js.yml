@@ -1,13 +1,14 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-name: learn-github-actions 
+name: Demo 2 Pipeline
 on: [push]
 jobs:
-  check-bats-version:
+  run-unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
-      - run: ls
+      - run: cd serverSide
+      - run: node testAllQuotes.js
