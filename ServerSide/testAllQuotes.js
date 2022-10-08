@@ -34,5 +34,4 @@ if (res03.search("indicate where smiles have been") > -1){
     logPass("T03");
 } else {
     logFail("T03");
-    //test
 }
