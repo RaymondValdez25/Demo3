@@ -35,3 +35,12 @@ if (res03.search("indicate where smiles have been") > -1){
 } else {
     logFail("T03");
 }
+
+//simulate a failed unit test
+let res04 = aq03.findQuote("graves"); //"Before you embark on a journey of revenge, dig two graves."
+if (res04.search("yadda yadda") > -1){
+    logPass("T04");
+} else {
+    logFail("T04");
+    throw 'test error code'
+}
