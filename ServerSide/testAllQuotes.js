@@ -35,6 +35,11 @@ if (res03.search("indicate where smiles have been") > -1){
 } else {
     logFail("T03");
 }
-
-//added log fail
-throw 'test exception'
+// T04 added log fail
+let res04 = aq01.findQuote("asdddasdlajdl");
+if (res02.search("No matching quote") > -1){
+    logPass("T0");
+} else {
+    logFail("T02");
+    throw 'exception'
+}
