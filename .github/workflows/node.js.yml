@@ -11,4 +11,4 @@ jobs:
         with:
           node-version: '14'
       - run: cd ServerSide
-      - run: node testAllQuotes.js
+      - run: ls
