@@ -22,7 +22,7 @@ if (res01.search("Before you embark") > -1){
 }
 // T02 - Search for a quote and fail
 let res02 = aq01.findQuote("missing");
-if (res02.search("No matching quote123") > -1){
+if (res02.search("No matching quote") > -1){
     logPass("T02");
 } else {
     logFail("T02");
@@ -31,7 +31,7 @@ if (res02.search("No matching quote123") > -1){
 let aq03 = new AllQuotes();
 aq03.loadFromFile("../data/3_quotes.csv");
 let res03 = aq03.findQuote("smiles");
-if (res03.search("indicate where smiles have been") > -1){
+if (res03.search("indicate where smiles have been123") > -1){
     logPass("T03");
 } else {
     logFail("T03");
