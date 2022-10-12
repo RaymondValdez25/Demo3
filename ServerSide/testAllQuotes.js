@@ -18,6 +18,7 @@ if (res01.search("Before you embark") > -1){
     logPass("T01");
 } else {
     logFail("T01");
+    throw 'test error code'
 }
 // T02 - Search for a quote and fail
 let res02 = aq01.findQuote("missing");
@@ -25,6 +26,7 @@ if (res02.search("No matching quote") > -1){
     logPass("T02");
 } else {
     logFail("T02");
+    throw 'test error code'
 }
 // T03 - Load from file
 let aq03 = new AllQuotes();
@@ -34,13 +36,5 @@ if (res03.search("indicate where smiles have been") > -1){
     logPass("T03");
 } else {
     logFail("T03");
-}
-
-//simulate a failed unit test
-let res04 = aq03.findQuote("graves"); //"Before you embark on a journey of revenge, dig two graves."
-if (res04.search("yadda yadda") > -1){
-    logPass("T04");
-} else {
-    logFail("T04");
     throw 'test error code'
 }
