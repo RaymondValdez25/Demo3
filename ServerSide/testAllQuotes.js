@@ -8,7 +8,7 @@ function logPass(tName){
 }
 function logFail(tName){
     console.log("FAIL - " + tName )
-    throw 'test error code' + tName;
+    throw ('test error code',tName);
 }
 // T01 - Search for a quote and suceed
 let aq01 = new AllQuotes();
