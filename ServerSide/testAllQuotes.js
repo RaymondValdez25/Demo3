@@ -22,7 +22,7 @@ if (res01.search("Before you embark") > -1){
 }
 // T02 - Search for a quote and fail
 let res02 = aq01.findQuote("missing");
-if (res02.search("No matching quote123") > -1){
+if (res02.search("No matching quote") > -1){
     logPass("T02");
 } else {
     logFail("T02");
