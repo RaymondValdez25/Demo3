@@ -25,7 +25,7 @@ function runtest1(){
     aq01.addQuote("Every man is guilty of all the good he didn't do.");
     aq01.addQuote("Before you embark on a journey of revenge, dig two graves.");
     let res01 = aq01.findQuote("graves");
-    if (res01.search("Before you embark123") > -1){
+    if (res01.search("Before you embark") > -1){
         logPass("T01");
     } else {
         logFail("T01");
