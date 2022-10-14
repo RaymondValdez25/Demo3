@@ -1,4 +1,4 @@
-name: Demo 2 Pipeline
+name: Pipeline
 on: [push]
 jobs:
   run-unit-tests:
@@ -8,3 +8,8 @@ jobs:
       - run: |
           cd ServerSide
           node testAllQuotes.js
+  
+  run-EC2-instance:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "helloworld"
