@@ -10,6 +10,7 @@ jobs:
           node testAllQuotes.js
   
   run-EC2-instance:
+    needs: run-unit-tests
     runs-on: ubuntu-latest
     steps:
       - run: echo "helloworld"
