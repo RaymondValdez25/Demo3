@@ -8,23 +8,8 @@ jobs:
       - run: |
           cd ServerSide
           node testAllQuotes.js
-  
-  run-EC2-instance:
-    needs: run-unit-tests
-    runs-on: ubuntu-latest
-    steps:
-      - run: aws --version
       
-      
-  run-test-bashScript:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Run build script
-      run: ./.github/scripts/build.sh
-      #shell: bash
-
-  deploy:
+  configure-aws:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
@@ -48,13 +33,12 @@ jobs:
         aws-access-key-id: AKIAV3IW62MKEATQAYF3
         aws-secret-access-key: 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
         aws-region: us-east-2
-    
-    - run:
-         aws --region us-east-2 ec2 run-instances \
-       --dry-run \
-       --image-id $AWS_LINUX_AMI --count 1 \
-       --instance-type t2.micro \
-       --subnet-id $MY_PUBLIC_SUBNET \
-       --security-group-ids $MY_SECURITY_GROUP \
-       --key-name $MY_KEY_PAIR
 
+  run-test-bashScript:
+    needs: configure-aws
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run build script
+      run: ./.github/scripts/build.sh
+      #shell: bash
