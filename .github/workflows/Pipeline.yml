@@ -13,4 +13,4 @@ jobs:
     needs: run-unit-tests
     runs-on: ubuntu-latest
     steps:
-      - run: echo "helloworld"
+      - run: aws --version
