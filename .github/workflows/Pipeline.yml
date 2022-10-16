@@ -9,8 +9,7 @@ jobs:
           cd ServerSide
           node testAllQuotes.js
       
-  configure-aws:
-    name: Upload to Amazon S3
+  Configure-AWS:
     runs-on: ubuntu-latest
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
@@ -34,8 +33,8 @@ jobs:
         aws-secret-access-key: Cn3hhH7O+pr/zURBQ+N9bDBBr1TeHiJa7ppurepo
         aws-region: us-east-2
 
-  run-test-bashScript:
-    needs: configure-aws
+  Launch-EC2-Instance:
+    needs: Configure-AWS
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
