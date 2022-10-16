@@ -30,8 +30,8 @@ jobs:
         #role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
         #role-duration-seconds: 1200
         #role-session-name: MySessionName
-        aws-access-key-id: AKIAV3IW62MKEATQAYF3
-        aws-secret-access-key: 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
+        aws-access-key-id: ""
+        aws-secret-access-key: ""
         aws-region: us-east-2
       
     - name: run-script
