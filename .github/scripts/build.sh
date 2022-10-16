@@ -15,3 +15,8 @@ export MY_SECURITY_GROUP="sg-0cddccc77ca099d24"
 # --subnet-id $MY_PUBLIC_SUBNET \
 # --security-group-ids $MY_SECURITY_GROUP \
 # --key-name $MY_KEY_PAIR
+
+echo $AWS_LINUX_AMI
+echo $MY_PUBLIC_SUBNET
+echo $MY_SECURITY_GROUP
+echo $MY_KEY_PAIR
