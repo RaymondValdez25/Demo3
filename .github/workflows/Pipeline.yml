@@ -15,6 +15,14 @@ jobs:
     steps:
       - run: aws --version
       
+      
+  run-test-bashScript:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run build script
+      run: ./.github/scripts/build.sh
+      #shell: bash
+
   deploy:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
