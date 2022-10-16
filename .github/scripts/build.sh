@@ -12,7 +12,7 @@ echo $AWS_LINUX_AMI
 echo $MY_PUBLIC_SUBNET
 echo $MY_SECURITY_GROUP
 echo $MY_KEY_PAIR
-
+ 
 #Remove the dryrun flag when everything seems to be ready
 aws --region us-east-2 ec2 run-instances \
  --image-id $AWS_LINUX_AMI --count 1 \
