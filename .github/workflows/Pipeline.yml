@@ -19,6 +19,7 @@ jobs:
   run-test-bashScript:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Run build script
       run: ./.github/scripts/build.sh
       #shell: bash
