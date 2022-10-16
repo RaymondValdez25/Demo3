@@ -1,6 +1,6 @@
 #!/bin/bash
 # AMI for AWS LINUX in the us-east-2 region
-export AWS_LINUX_AMI="ami-0ca622d21decca9ad"
+export AWS_LINUX_AMI=""
 # Name of a key pair I will use to log in
 export MY_KEY_PAIR="PuTTYKeyPair1"
 # Public subnet in my VPC in us-east-2 region
