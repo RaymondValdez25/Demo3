@@ -19,7 +19,7 @@ aws --region us-east-2 ec2 run-instances \
  --instance-type t2.micro \
  --subnet-id $MY_PUBLIC_SUBNET \
  --security-group-ids $MY_SECURITY_GROUP \
- --key-name $MY_KEY_PAIR
+ --key-name $MY_KEY_PAIR \
  --associate-public-ip-address
 
 
