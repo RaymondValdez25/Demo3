@@ -15,10 +15,13 @@ echo $MY_KEY_PAIR
  
 #Remove the dryrun flag when everything seems to be ready
 aws --region us-east-2 ec2 run-instances \
+ --dry-run \
  --image-id $AWS_LINUX_AMI --count 1 \
  --instance-type t2.micro \
  --subnet-id $MY_PUBLIC_SUBNET \
  --security-group-ids $MY_SECURITY_GROUP \
  --key-name $MY_KEY_PAIR
+ --associate-public-ip-address
+
 
 
