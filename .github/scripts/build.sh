@@ -6,7 +6,7 @@ export MY_KEY_PAIR="PuTTYKeyPair1"
 # Public subnet in my VPC in us-east-2 region
 export MY_PUBLIC_SUBNET="subnet-080c245137fc1dbc8"
 # Security group for that VPC providing port 22 and 3000 access
-export MY_SECURITY_GROUP="sg-0cddccc77ca099d24"
+export MY_SECURITY_GROUP="sg-08f82f6a506a00310"
 
 echo $AWS_LINUX_AMI
 echo $MY_PUBLIC_SUBNET
