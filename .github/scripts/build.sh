@@ -14,14 +14,14 @@ echo $MY_SECURITY_GROUP
 echo $MY_KEY_PAIR
  
 #Remove the dryrun flag when everything seems to be ready
-listOfInstances=$(aws --region us-east-2 ec2 run-instances \
+InstanceID=$(aws --region us-east-2 ec2 run-instances \
  --image-id $AWS_LINUX_AMI --count 1 \
  --instance-type t2.micro \
  --subnet-id $MY_PUBLIC_SUBNET \
  --security-group-ids $MY_SECURITY_GROUP \
  --key-name $MY_KEY_PAIR \
- --associate-public-ip-address)
+ --associate-public-ip-address)["Instances"][0]["InstanceId"]
 
-echo "the instance is $listOfInstances["Instances"][0]["InstanceId"]"
+echo "the instanceID is $InstanceID"
 
 
