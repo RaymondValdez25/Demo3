@@ -14,7 +14,7 @@ echo $MY_SECURITY_GROUP
 echo $MY_KEY_PAIR
  
 #Remove the dryrun flag when everything seems to be ready
-listOfInstances = $(aws --region us-east-2 ec2 run-instances \
+listOfInstances=$(aws --region us-east-2 ec2 run-instances \
  --image-id $AWS_LINUX_AMI --count 1 \
  --instance-type t2.micro \
  --subnet-id $MY_PUBLIC_SUBNET \
