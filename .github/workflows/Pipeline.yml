@@ -31,11 +31,11 @@ jobs:
         
         
     - name: run-LaunchEC2-script
-      run: ./.github/scripts/LaunchEC2.sh
+    - run: ./.github/scripts/LaunchEC2.sh
       
       #not complete
     - name: ssh-into-EC2-instance
-      run: |
+    - run: |
           publicIP=$(aws ec2 describe-instances \
           --region us-east-2 \
           --instance-ids \
