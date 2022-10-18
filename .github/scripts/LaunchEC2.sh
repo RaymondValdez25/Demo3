@@ -28,6 +28,6 @@ aws --region us-east-2 ec2 run-instances \
  --key-name $MY_KEY_PAIR \
  --tag-specifications $TAGS \
  --user-data file://.github/scripts/user-script.sh \
- --iam-instance-profile ARN=$ARN
+ --iam-instance-profile Arn=$ARN
 
 
