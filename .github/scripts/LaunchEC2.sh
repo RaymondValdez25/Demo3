@@ -29,5 +29,3 @@ aws --region us-east-2 ec2 run-instances \
  --tag-specifications $TAGS \
  --user-data file://.github/scripts/user-script.sh \
  --iam-instance-profile Name=$ARN_NAME
-
-
