@@ -23,6 +23,6 @@ aws --region us-east-2 ec2 run-instances \
  --security-group-ids $MY_SECURITY_GROUP \
  --key-name $MY_KEY_PAIR \
  --tag-specifications $TAGS \
- --user-data file://github/scripts/user-script.sh
+ --user-data file://.github/scripts/user-script.txt
 
 
