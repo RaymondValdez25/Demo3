@@ -10,7 +10,7 @@ export MY_SECURITY_GROUP="sg-08f82f6a506a00310"
 #my instance name
 export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=Test_Quote_Server}]"
 #instance profile
-export IAM_PROFILE="RaymondValdez"
+#export IAM_PROFILE="RaymondValdez"
 #ARN
 export ARN="arn:aws:iam::402164470548:user/RaymondValdez"
 
@@ -28,6 +28,6 @@ aws --region us-east-2 ec2 run-instances \
  --key-name $MY_KEY_PAIR \
  --tag-specifications $TAGS \
  --user-data file://.github/scripts/user-script.sh \
- --iam-instance-profile ARN=$ARN Name=$IAM_PROFILE
+ --iam-instance-profile ARN=$ARN
 
 
