@@ -1,5 +1,5 @@
 #!/bin/bash
-ls
+pwd
 tar -cvf deployment.tar data serverSide
 gzip deployment.tar
 aws s3 --dryrun cp deployment.tar.gz\
