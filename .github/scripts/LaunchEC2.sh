@@ -24,7 +24,7 @@ aws --region us-east-2 ec2 run-instances \
  --subnet-id $MY_PUBLIC_SUBNET \
  --security-group-ids $MY_SECURITY_GROUP \
  --key-name $MY_KEY_PAIR \
- --tag-specifications $TAGS
+ --tag-specifications $TAGS \
  --user-data $user-script
 
 
