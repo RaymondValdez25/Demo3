@@ -22,7 +22,7 @@ GroupsAndInstances=$(aws --region us-east-2 ec2 run-instances \
  --key-name $MY_KEY_PAIR \
  --associate-public-ip-address)
  
- InstanceID=$(GroupsAndInstances["Instances"][0]["InstanceId"])
+ InstanceID=${GroupsAndInstances["Instances"][0]["InstanceId"]}
 
 echo "the instanceID is $InstanceID"
 
