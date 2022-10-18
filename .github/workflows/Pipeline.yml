@@ -30,16 +30,7 @@ jobs:
     - name: run-LaunchEC2-script
       run: ./.github/scripts/LaunchEC2.sh
       
-    
-  Get-IP-Address:
-    needs: Configure-CLI-And-Deploy-EC2
-    runs-on: ubuntu-latest
-    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
-    steps:
-    #- name: Checkout
-    #  uses: actions/checkout@v2
-      
-    - name: run-LaunchEC2-script
+    - name: get-IPAddress-of-LaunchedInstance
       run: |
           publicIP=$(aws ec2 describe-instances \
           --region us-east-2 \
@@ -49,5 +40,8 @@ jobs:
           --output=text)
           
           echo "$publicIP"
+      
+    
+
       
       
