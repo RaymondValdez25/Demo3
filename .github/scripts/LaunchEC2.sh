@@ -12,7 +12,7 @@ export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=Test_Quote_Server}]"
 #instance profile
 #export IAM_PROFILE="RaymondValdez"
 #ARN
-export ARN="arn:aws:iam::402164470548:user/RaymondValdez"
+export ARN="arn:aws:iam::402164470548:role/AmazonS3FullAccess"
 
 echo $AWS_LINUX_AMI
 echo $MY_PUBLIC_SUBNET
