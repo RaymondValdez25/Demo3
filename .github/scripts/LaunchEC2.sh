@@ -9,6 +9,8 @@ export MY_PUBLIC_SUBNET="subnet-080c245137fc1dbc8"
 export MY_SECURITY_GROUP="sg-08f82f6a506a00310"
 #my instance name
 export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=Test_Quote_Server}]"
+#location of userscript
+export user-script="./.github/scripts/user-script.sh"
 
 echo $AWS_LINUX_AMI
 echo $MY_PUBLIC_SUBNET
@@ -23,5 +25,6 @@ aws --region us-east-2 ec2 run-instances \
  --security-group-ids $MY_SECURITY_GROUP \
  --key-name $MY_KEY_PAIR \
  --tag-specifications $TAGS
+ --user-data $user-script
 
 
