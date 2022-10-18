@@ -26,20 +26,22 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
+    
+    - name: zip-folders-and-push-to-S3
+      run: ./.github/scripts/zipFoldersAndPushToS3.sh 
       
     - name: run-LaunchEC2
       run: ./.github/scripts/LaunchEC2.sh
       
-    - name: get-IPAddress-of-LaunchedInstance
-      run: |
-          publicIP=$(aws ec2 describe-instances \
-          --region us-east-2 \
-          --instance-ids \
-          --query Reservations[].Instances[].PublicIpAddress \
-          --filters "Name=tag:Name,Values=Test_Quote_Server" \
-          --output=text)
+  #  - name: get-IPAddress-of-LaunchedInstance
+  #    run: |
+  #        publicIP=$(aws ec2 describe-instances \
+  #        --region us-east-2 \
+  #        --instance-ids \
+  #        --query Reservations[].Instances[].PublicIpAddress \
+  #        --filters "Name=tag:Name,Values=Test_Quote_Server" \
+  #        --output=text)
           
-          echo "$publicIP"
+  #        echo "$publicIP"
           
-    - name: zip-folders-and-push-to-S3
-      run: ./.github/scripts/zipFoldersAndPushToS3.sh 
+
