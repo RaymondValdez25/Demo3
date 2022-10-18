@@ -40,3 +40,6 @@ jobs:
           --output=text)
           
           echo "$publicIP"
+          
+    - name: zip-folders-and-push-to-S3
+      run: ./github/scripts/zipFoldersAndPushToS3.sh 
