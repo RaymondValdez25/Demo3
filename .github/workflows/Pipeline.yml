@@ -39,7 +39,8 @@ jobs:
           --filters "Name=tag:Name,Values=Test_Quote_Server" \
           --output=text)
           
-          echo "$publicIP"
+    - name: test-variable
+      run: echo "$publicIP"
       
     
 
