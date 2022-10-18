@@ -1,3 +1,8 @@
 #!/bin/bash
-aws s3 cp "s3://raymondsdemo3workbucket/deployment.tar.gz" \
- deployment.tar.gz
+
+aws s3 cp "s3://nwilde-work-bucket/deployment.tar.gz" \
+deployment.tar.gz
+gunzip deployment.tar.gz
+tar -xf deployment.tar
+npm install pm2@latest -g
+pm2 start server.js
