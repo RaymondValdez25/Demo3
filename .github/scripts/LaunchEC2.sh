@@ -10,7 +10,7 @@ export MY_SECURITY_GROUP="sg-08f82f6a506a00310"
 #my instance name
 export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=Test_Quote_Server}]"
 #location of userscript
-export user-script="./.github/scripts/user-script.sh"
+export user_script="file://github/scripts/user-script.sh"
 
 echo $AWS_LINUX_AMI
 echo $MY_PUBLIC_SUBNET
