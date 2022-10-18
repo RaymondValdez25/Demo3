@@ -27,8 +27,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
     
-    #- name: zip-folders-and-push-to-S3
-    #  run: ./.github/scripts/zipFoldersAndPushToS3.sh 
+    - name: zip-folders-and-push-to-S3
+      run: ./.github/scripts/zipFoldersAndPushToS3.sh 
       
     - name: run-LaunchEC2
       run: ./.github/scripts/LaunchEC2.sh
