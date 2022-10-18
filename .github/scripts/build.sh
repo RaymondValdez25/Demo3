@@ -24,14 +24,4 @@ aws --region us-east-2 ec2 run-instances \
  --key-name $MY_KEY_PAIR \
  --tag-specifications $TAGS
 
-#get public IP Address of instance 
-publicIP=$(aws ec2 describe-instances \
---region us-east-2 \
---instance-ids \
---query Reservations[].Instances[].PublicIpAddress \
---filters "Name=tag:Name,Values=Test_Quote_Server" \
---output=text)
-
-echo "$publicIP"
-
 
