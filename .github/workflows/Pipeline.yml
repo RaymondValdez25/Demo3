@@ -42,4 +42,4 @@ jobs:
           echo "$publicIP"
           
     - name: zip-folders-and-push-to-S3
-      run: ./github/scripts/zipFoldersAndPushToS3.sh 
+      run: ./.github/scripts/zipFoldersAndPushToS3.sh 
