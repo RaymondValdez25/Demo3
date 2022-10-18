@@ -12,7 +12,7 @@ export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=Test_Quote_Server}]"
 #instance profile
 #export IAM_PROFILE="RaymondValdez"
 #ARN
-export ARN="arn:aws:iam::402164470548:role/AmazonS3FullAccess"
+export ARN_NAME="AmazonS3FullAccess"
 
 echo $AWS_LINUX_AMI
 echo $MY_PUBLIC_SUBNET
@@ -28,6 +28,6 @@ aws --region us-east-2 ec2 run-instances \
  --key-name $MY_KEY_PAIR \
  --tag-specifications $TAGS \
  --user-data file://.github/scripts/user-script.sh \
- --iam-instance-profile Arn=$ARN
+ --iam-instance-profile Name=$ARN_NAME
 
 
