@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "hello world"
+aws s3 cp "s3://raymondsdemo3workbucket/deployment.tar.gz" \
+ deployment.tar.gz
