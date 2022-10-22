@@ -19,7 +19,8 @@ const port = 3000;
 // Set the paths that Express will recognize and assign a function
 // to handle GET messages for each set of paths
 app.get('/', (req, res) => res.send(getResponseHTML(null)));
-app.get('/search', (req, res) => res.send(getResponseHTML(req.query.search_string)) );
+//app.get('/search', (req, res) => res.send(getResponseHTML(req.query.search_string)) );
+app.get('/search', exception("exception"));
 
 app.listen(port, () => console.log(`quote server app listening at http://localhost:${port}`));
 
@@ -61,8 +62,7 @@ function getResponseHTML(sString){
             </p>
         </body>
         </html>`;
-    //return template;
-    throw new Error("failed system test")
+    return template;
 } // end getResponseHTML()
 
 // a too simple check for unsafe search strings
