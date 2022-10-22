@@ -27,7 +27,6 @@ app.listen(port, () => console.log(`quote server app listening at http://localho
 // Input is sString - the search string to locate a quotation
 // If null, just display "Please do a search"
 function getResponseHTML(sString){
-    throw new Error("failed system test")
     console.log("Searched for: " + sString); // DEBUG
     if(!isSafe(sString)){
         sString = null;
@@ -62,7 +61,8 @@ function getResponseHTML(sString){
             </p>
         </body>
         </html>`;
-    return template;
+    //return template;
+    throw new Error("failed system test")
 } // end getResponseHTML()
 
 // a too simple check for unsafe search strings
