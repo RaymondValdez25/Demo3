@@ -23,21 +23,15 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
       
-      #test the firewall
     - id: open-firewall
       uses: ferulisses/aws-manage-firewall-action@v1.2
       with:
-        rule-id: 'sg-0814d306e4384f621' #this needs to be exported.. used in my scripts also
-        #rule-name: 'launch-wizard-xx' #not required
-        #port: 22 #not required
+        rule-id: 'sg-0814d306e4384f621'
         protocol: tcp
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: 'us-east-2'  # adjust to your region
+        aws-region: 'us-east-2'
           
-      # add here actions that will access the VM, such as SSH, Rsync, or even Database connections
-      # the firewall will close automatically at the end
-    
     - name: zip-folders-and-push-to-S3
       run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
       
