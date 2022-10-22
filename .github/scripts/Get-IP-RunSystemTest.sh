@@ -8,6 +8,6 @@ publicIP=$(aws ec2 describe-instances \
 --output=text)
 #sleep 120
 
-echo $publicIP
+echo echoing IPs $publicIP
 
 #curl http://$publicIP:3000/search?search_string=graves
