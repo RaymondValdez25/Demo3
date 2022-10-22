@@ -52,6 +52,5 @@ jobs:
         --query Reservations[].Instances[].PublicIpAddress \
         --filters "Name=tag:Name,Values=Test_Quote_Server" \
         --output=text)
-        curl http://$publicIP:3000/search?search_string=graves
-      #curl --connect-timeout 120 http://$publicIP/search?search_string=graves
-            
+        curl --connect-timeout 360 http://$publicIP:3000/search?search_string=graves
+      #curl http://$publicIP:3000/search?search_string=graves    
