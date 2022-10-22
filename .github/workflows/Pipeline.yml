@@ -10,7 +10,6 @@ jobs:
           node testAllQuotes.js
       
   Deploy-EC2-TEST:
-    timeout-minutes: 30
     needs: run-unit-tests
     runs-on: ubuntu-latest
     steps:
@@ -40,17 +39,16 @@ jobs:
       # the firewall will close automatically at the end
     
     - name: zip-folders-and-push-to-S3
-      run: ./.github/scripts/zipFoldersAndPushToS3.sh 
+      run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
       
     - name: run-LaunchEC2-TEST
       run: ./.github/scripts/LaunchEC2Test.sh
       
     - name: get-IP-and-perform-tests
-      run: ./.github/scripts/systemTestAndGetIP.sh
+      run: ./.github/scripts/Get-IP-RunSystemTest.sh
         
         
   Deploy-EC2-PROD:
-      timeout-minutes: 30
       needs: Deploy-EC2-TEST
       runs-on: ubuntu-latest
       steps:
