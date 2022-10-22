@@ -6,7 +6,7 @@ export MY_KEY_PAIR="PuTTYKeyPair1"
 # Public subnet in my VPC in us-east-2 region
 export MY_PUBLIC_SUBNET="subnet-080c245137fc1dbc8"
 # Security group for that VPC providing port 22 and 3000 access
-export MY_SECURITY_GROUP="sg-08f82f6a506a00310"
+export MY_SECURITY_GROUP="sg-0814d306e4384f621"
 #my instance name
 export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=Test_Quote_Server}]"
 #instance profile
