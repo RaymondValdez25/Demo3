@@ -20,9 +20,7 @@ const port = 3000;
 // to handle GET messages for each set of paths
 app.get('/', (req, res) => res.send(getResponseHTML(null)));
 //app.get('/search', (req, res) => res.send(getResponseHTML(req.query.search_string)) );
-app.get('/search', (req, res) => res.status(400).send({
-    message: 'This is an error!'
- }));
+app.get('/search', (req, res) => res.send(getResponseHTML("123")) );
 
 app.listen(port, () => console.log(`quote server app listening at http://localhost:${port}`));
 
