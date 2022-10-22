@@ -30,4 +30,4 @@ jobs:
       run: ./.github/scripts/LaunchEC2.sh
       
     - name: get-ip-addr
-      run: ip addr
+      run: hostname -I
