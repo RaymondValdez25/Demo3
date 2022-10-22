@@ -10,6 +10,7 @@ jobs:
           node testAllQuotes.js
       
   Configure-CLI-And-Deploy-EC2:
+    timeout-minutes: 5
     needs: run-unit-tests
     runs-on: ubuntu-latest
     steps:
@@ -52,4 +53,6 @@ jobs:
         --query Reservations[].Instances[].PublicIpAddress \
         --filters "Name=tag:Name,Values=Test_Quote_Server" \
         --output=text)
-        curl --connect-timeout 120 http://$publicIP/search?search_string=graves
+        curl http://$publicIP/search?search_string=graves
+      #curl --connect-timeout 120 http://$publicIP/search?search_string=graves
+            
