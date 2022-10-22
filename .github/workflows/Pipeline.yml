@@ -44,4 +44,5 @@ jobs:
     - name: run-LaunchEC2
       run: ./.github/scripts/LaunchEC2.sh
       
-      
+    - name: curl-test
+      run: curl http://3.17.60.187:3000/search?search_string=graves
