@@ -8,5 +8,4 @@ Instances=$(aws ec2 describe-instances \
 --output=text)
 
 echo $Instances
-
 aws ec2 terminate-instances --instance-ids $Instances

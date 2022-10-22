@@ -1,4 +1,4 @@
-#!/bin/bash        
+#!/bin/bash  
         
 publicIP=$(aws ec2 describe-instances \
 --region us-east-2 \
