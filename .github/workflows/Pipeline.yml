@@ -54,4 +54,3 @@ jobs:
         --filters "Name=tag:Name,Values=Test_Quote_Server" \
         --output=text)
         curl --connect-timeout 360 http://$publicIP:3000/search?search_string=graves
-      #curl http://$publicIP:3000/search?search_string=graves    
