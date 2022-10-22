@@ -9,7 +9,7 @@ jobs:
           cd ServerSide
           node testAllQuotes.js
       
-  Configure-CLI-And-Deploy-EC2-TEST:
+  Deploy-EC2-TEST:
     timeout-minutes: 30
     needs: run-unit-tests
     runs-on: ubuntu-latest
@@ -45,13 +45,13 @@ jobs:
     - name: run-LaunchEC2-TEST
       run: ./.github/scripts/LaunchEC2Test.sh
       
-    - name: curl-systemTest-and-get-IP
+    - name: get-IP-and-perform-tests
       run: ./.github/scripts/systemTestAndGetIP.sh
         
         
-  Configure-CLI-And-Deploy-EC2-PROD:
+  Deploy-EC2-PROD:
       timeout-minutes: 30
-      needs: Configure-CLI-And-Deploy-EC2-TEST
+      needs: Deploy-EC2-TEST
       runs-on: ubuntu-latest
       steps:
       - name: Checkout
@@ -63,21 +63,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
-
-        #test the firewall
-      - id: open-firewall
-        uses: ferulisses/aws-manage-firewall-action@v1.2
-        with:
-          rule-id: 'sg-0329da65af5ecbc8b' #this needs to be exported.. used in my scripts also
-          #rule-name: 'launch-wizard-xx' #not required
-          #port: 22 #not required
-          protocol: tcp
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'us-east-2'  # adjust to your region
-
-        # add here actions that will access the VM, such as SSH, Rsync, or even Database connections
-        # the firewall will close automatically at the end
 
       - name: run-LaunchEC2-PROD
         run: ./.github/scripts/LaunchEC2Prod.sh
