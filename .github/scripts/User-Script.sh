@@ -11,5 +11,3 @@ nvm install --lts
 npm install pm2@latest -g
 cd ServerSide
 pm2 start server.js
-
-
