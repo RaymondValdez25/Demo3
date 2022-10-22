@@ -28,7 +28,7 @@ jobs:
     - id: open-firewall
       uses: ferulisses/aws-manage-firewall-action@v1.2
       with:
-        rule-id: 'sg-08f82f6a506a00310' #this needs to be exported.. used in my scripts also
+        rule-id: 'sg-0814d306e4384f621' #this needs to be exported.. used in my scripts also
         #rule-name: 'launch-wizard-xx' #not required
         #port: 22 #not required
         protocol: tcp
