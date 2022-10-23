@@ -41,10 +41,17 @@ jobs:
     - name: run-LaunchEC2-TEST
       run: ./.github/scripts/LaunchEC2Test.sh
       
-    - name: get-IP-and-perform-tests
-      run: ./.github/scripts/Get-IP-RunSystemTest.sh
+    - name: get-IP
+      run: |
+        ./.github/scripts/Get-IP-RunSystemTest.sh
+        ${{env.EC2_PUBLIC_IP}}
+    
+    - name: run-a-system-test
+      uses: wei/curl@master
+      with:
+        args: http://${{env.EC2_PUBLIC_IP}}:3000/search?search_string=money
         
-        
+
   Deploy-EC2-PROD:
       needs: Deploy-EC2-TEST
       runs-on: ubuntu-latest

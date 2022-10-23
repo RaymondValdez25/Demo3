@@ -19,7 +19,7 @@ const port = 3000;
 // Set the paths that Express will recognize and assign a function
 // to handle GET messages for each set of paths
 app.get('/', (req, res) => res.send(getResponseHTML(null)));
-//app.get('/search', (req, res) => res.send(getResponseHTML(req.query.search_string)) );
+app.get('/search', (req, res) => res.send(getResponseHTML(req.query.search_string)) );
 
 app.listen(port, () => console.log(`quote server app listening at http://localhost:${port}`));
 
