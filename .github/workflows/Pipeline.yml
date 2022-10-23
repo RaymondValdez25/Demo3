@@ -23,7 +23,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
       
-    - id: open-firewall
+    - name: open-firewall
       uses: ferulisses/aws-manage-firewall-action@v1.2
       with:
         rule-id: 'sg-0814d306e4384f621'
