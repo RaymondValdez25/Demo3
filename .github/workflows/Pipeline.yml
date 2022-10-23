@@ -46,7 +46,7 @@ jobs:
         
         
   Deploy-EC2-PROD:
-      needs: Deploy-EC2-TEST
+      #needs: Deploy-EC2-TEST
       runs-on: ubuntu-latest
       steps:
       - name: Checkout
