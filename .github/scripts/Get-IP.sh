@@ -9,6 +9,3 @@ publicIP=$(aws ec2 describe-instances \
 sleep 120
 
 echo "EC2_PUBLIC_IP=$publicIP" >> $GITHUB_ENV
-
-#echo echoing IPs $publicIP
-#curl http://$publicIP:3000/search?search_string=money
