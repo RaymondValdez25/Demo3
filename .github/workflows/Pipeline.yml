@@ -10,7 +10,7 @@ jobs:
           node testAllQuotes.js
       
   Deploy-EC2-TEST:
-    #needs: run-unit-tests
+    needs: run-unit-tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -46,7 +46,7 @@ jobs:
         
         
   Deploy-EC2-PROD:
-      #needs: Deploy-EC2-TEST
+      needs: Deploy-EC2-TEST
       runs-on: ubuntu-latest
       steps:
       - name: Checkout
