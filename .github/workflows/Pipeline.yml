@@ -33,13 +33,18 @@ jobs:
         aws-region: 'us-east-2'
 
     - name: terminate-All-TEST-Instances
-      run: ./.github/scripts/TerminateTestInstances.sh
+      run: |
+        Environment="Test"
+        ./.github/scripts/TerminateTestInstances.sh
           
     - name: zip-folders-and-push-to-S3
       run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
       
     - name: run-LaunchEC2-TEST
-      run: ./.github/scripts/LaunchEC2Test.sh
+      run: |
+        Environment="Test"
+        SecurityGroup="sg-0814d306e4384f621"
+        ./.github/scripts/LaunchEC2Test.sh
       
     - name: get-IP-EC2
       run: ./.github/scripts/Get-IP.sh
@@ -65,7 +70,12 @@ jobs:
           aws-region: us-east-2
       
       - name: terminate-All-PROD-Instances
-        run: ./.github/scripts/TerminateProdInstances.sh
+        run: |
+          Environment="Prod"
+          ./.github/scripts/TerminateProdInstances.sh
 
       - name: run-LaunchEC2-PROD
-        run: ./.github/scripts/LaunchEC2Prod.sh
+        run: |
+          Environment="Prod"
+          SecurityGroup="sg-0329da65af5ecbc8b"
+          ./.github/scripts/LaunchEC2Prod.sh

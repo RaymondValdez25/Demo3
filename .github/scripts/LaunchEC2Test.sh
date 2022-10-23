@@ -6,9 +6,9 @@ export MY_KEY_PAIR="PuTTYKeyPair1"
 # Public subnet in my VPC in us-east-2 region
 export MY_PUBLIC_SUBNET="subnet-080c245137fc1dbc8"
 # Security group for that VPC providing port 22 and 3000 access
-export MY_SECURITY_GROUP="sg-0814d306e4384f621"
+export MY_SECURITY_GROUP="${SecurityGroup}"
 #my instance name
-export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=Test_Quote_Server}]"
+export TAGS="ResourceType=instance,Tags=[{Key=Name,Value=${Environment}_Quote_Server}]"
 #instance profile
 #export IAM_PROFILE="RaymondValdez"
 #ARN
@@ -29,4 +29,3 @@ aws --region us-east-2 ec2 run-instances \
  --tag-specifications $TAGS \
  --user-data file://.github/scripts/User-Script.sh \
  --iam-instance-profile Name=$ARN_NAME
-
