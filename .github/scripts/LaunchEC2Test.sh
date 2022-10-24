@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # AMI for AWS LINUX in the us-east-2 region
 export AWS_LINUX_AMI="ami-0ca622d21decca9ad"
 # Name of a key pair I will use to log in

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 Instances=$(aws ec2 describe-instances \
 --region us-east-2 \
 --instance-ids \

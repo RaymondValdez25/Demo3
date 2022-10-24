@@ -34,7 +34,7 @@ jobs:
 
     - name: terminate-All-TEST-Instances
       run: |
-        Environment="Test"
+        export Environment="Test"
         ./.github/scripts/TerminateTestInstances.sh
           
     - name: zip-folders-and-push-to-S3
@@ -42,8 +42,8 @@ jobs:
       
     - name: run-LaunchEC2-TEST
       run: |
-        Environment="Test"
-        SecurityGroup="sg-0814d306e4384f621"
+        export Environment="Test"
+        export SecurityGroup="sg-0814d306e4384f621"
         ./.github/scripts/LaunchEC2Test.sh
       
     - name: get-IP-EC2
@@ -71,11 +71,11 @@ jobs:
       
       - name: terminate-All-PROD-Instances
         run: |
-          Environment="Prod"
+          export Environment="Prod"
           ./.github/scripts/TerminateProdInstances.sh
 
       - name: run-LaunchEC2-PROD
         run: |
-          Environment="Prod"
-          SecurityGroup="sg-0329da65af5ecbc8b"
+          export Environment="Prod"
+          export SecurityGroup="sg-0329da65af5ecbc8b"
           ./.github/scripts/LaunchEC2Prod.sh
