@@ -1,0 +1,11 @@
+#!/bin/bash  
+
+EC2_ID=$(aws ec2 describe-instances \
+--region us-east-2 \
+--instance-ids \
+--query Reservations[].Instances[].InstanceId  \
+--filters Name=tag:Name,Values=Prod_Quote_Server Name=instance-state-name,Values=running,pending \
+--output=text)
+aws ec2 modify-instance-attribute \
+--instance-id $EC2_ID \
+--groups sg-0329da65af5ecbc8b

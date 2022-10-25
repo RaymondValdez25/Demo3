@@ -64,24 +64,17 @@ jobs:
         ./.github/scripts/TerminateEC2Instances.sh
 
     #change EC2 name to Prod server
-    - name: renameTestEC2Instance
+    - name: rename-Test-EC2-Instance
       run: ./.github/scripts/RenameTestEC2Instance.sh
 
     #change security group to prod security group
-    - name: changeSGOfTestInstance
-      run: |
-        EC2_ID=$(aws ec2 describe-instances \
-        --region us-east-2 \
-        --instance-ids \
-        --query Reservations[].Instances[].InstanceId  \
-        --filters Name=tag:Name,Values=Prod_Quote_Server Name=instance-state-name,Values=running,pending \
-        --output=text)
-        aws ec2 modify-instance-attribute \
-        --instance-id $EC2_ID \
-        --groups sg-0329da65af5ecbc8b
-    
-    
+    - name: change-SG-Of-TestInstance
+      run: ./.github/scripts/ChangeSGOfTestInstance.sh
 
+    - name: associate-elastic-IP-to-new-Instance
+      run: aws ec2 associate-address --instance-id ${exported_EC2_ID} --public-ip 3.20.27.183
+
+    
   #Deploy-EC2-PROD:
   #    needs: Deploy-EC2-TEST
   #    runs-on: ubuntu-latest
