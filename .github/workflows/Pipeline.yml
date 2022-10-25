@@ -32,50 +32,71 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-2'
 
+    - name: zip-folders-and-push-to-S3
+      run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
+
     - name: terminate-All-TEST-Instances
       run: |
         export Environment="Test"
         ./.github/scripts/TerminateEC2Instances.sh
-          
-    - name: zip-folders-and-push-to-S3
-      run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
-      
+
     - name: run-LaunchEC2-TEST
       run: |
         export Environment="Test"
         export SecurityGroup="sg-0814d306e4384f621"
         ./.github/scripts/LaunchEC2.sh
-      
-    - name: get-IP-EC2
-      run: ./.github/scripts/Get-IP.sh
-    
+
+    - name: export-running-Test-IP-EC2
+      run: |
+        export Environment="Test"
+        ./.github/scripts/Get-running-IP.sh
+
+    - name: sleep
+      run: sleep 120
+
     - name: run-a-system-test
       uses: wei/curl@master
       with:
         args: http://${{env.EC2_PUBLIC_IP}}:3000/search?search_string=money
-
-
-  Deploy-EC2-PROD:
-      needs: Deploy-EC2-TEST
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Configure AWS-CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
       
-      - name: terminate-All-PROD-Instances
-        run: |
-          export Environment="Prod"
-          ./.github/scripts/TerminateEC2Instances.sh
 
-      - name: run-LaunchEC2-PROD
-        run: |
-          export Environment="Prod"
-          export SecurityGroup="sg-0329da65af5ecbc8b"
-          ./.github/scripts/LaunchEC2.sh
+  PromoteTo-PROD:
+    needs: Deploy-EC2-TEST
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS-CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+
+    - name: export-running-Test-InstanceID-EC2
+      run: |
+        export Environment="Test" 
+        ./.github/scripts/Get-running-InstanceID.sh
+
+    - name: export-running-Test-IP-EC2
+      run: |
+        export Environment="Test"  
+        ./.github/scripts/Get-running-IP.sh
+
+    - name: terminate-All-PROD-Instances
+      run: |
+        export Environment="Prod"
+        ./.github/scripts/TerminateEC2Instances.sh
+
+    - name: rename-Test-EC2-Instance
+      run: aws ec2 create-tags --resources ${{env.EC2_INSTANCE_ID}} --tag "Key=Name,Value=Prod_Quote_Server"
+
+    - name: change-SG-Of-TestInstance
+      run:  | 
+          aws ec2 modify-instance-attribute \
+          --instance-id ${{env.EC2_INSTANCE_ID}} \
+          --groups sg-0329da65af5ecbc8b
+
+    - name: associate-elastic-IP-to-new-Instance
+      run: aws ec2 associate-address --instance-id ${{env.EC2_INSTANCE_ID}} --public-ip 3.20.27.183
