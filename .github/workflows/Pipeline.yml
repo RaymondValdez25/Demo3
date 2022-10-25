@@ -84,25 +84,19 @@ jobs:
         export Environment="Test"  
         ./.github/scripts/Get-running-IP.sh
 
-    #disacociate IP address from old Prod EC2 instance
-
-    #Terminate all PROD Instances
     - name: terminate-All-PROD-Instances
       run: |
         export Environment="Prod"
         ./.github/scripts/TerminateEC2Instances.sh
 
-    #change EC2 name to Prod server
     - name: rename-Test-EC2-Instance
       run: aws ec2 create-tags --resources ${{env.EC2_INSTANCE_ID}} --tag "Key=Name,Value=Prod_Quote_Server"
 
-    #change security group to prod security group
     - name: change-SG-Of-TestInstance
       run:  | 
           aws ec2 modify-instance-attribute \
           --instance-id ${{env.EC2_INSTANCE_ID}} \
           --groups sg-0329da65af5ecbc8b
 
-    #associate IP address to new EC2 instance
     - name: associate-elastic-IP-to-new-Instance
       run: aws ec2 associate-address --instance-id ${{env.EC2_INSTANCE_ID}} --public-ip 3.20.27.183
