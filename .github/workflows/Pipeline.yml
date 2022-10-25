@@ -32,7 +32,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-2'
 
-
     - name: terminate-All-TEST-Instances
       run: |
         export Environment="Test"
@@ -60,6 +59,8 @@ jobs:
     #allocate IP address to new EC2 instance
     #change security group to prod security group
     
+    #terminate all prod instances
+
     #change EC2 name to Prod server
     - name: RenameTestEC2Instance
       run: ./.github/scripts/RenameTestEC2Instance.sh

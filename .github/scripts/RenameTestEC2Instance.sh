@@ -9,4 +9,4 @@ EC2_ID=$(aws ec2 describe-instances \
 
 
 echo EC2_ID
-aws ec2 create-tags --resources $EC2_ID --tag "Key=Name,Value=Prod_Quote_Server
+aws ec2 create-tags --resources $EC2_ID --tag "Key=Name,Value=Prod_Quote_Server"
