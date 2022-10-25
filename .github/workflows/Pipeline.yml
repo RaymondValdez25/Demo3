@@ -32,11 +32,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-2'
 
+
     - name: terminate-All-TEST-Instances
       run: |
         export Environment="Test"
         ./.github/scripts/TerminateEC2Instances.sh
-          
+
     - name: zip-folders-and-push-to-S3
       run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
       
@@ -55,27 +56,36 @@ jobs:
         args: http://${{env.EC2_PUBLIC_IP}}:3000/search?search_string=money
 
 
-  Deploy-EC2-PROD:
-      needs: Deploy-EC2-TEST
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    #disacociate IP address from old EC2 instance
+    #allocate IP address to new EC2 instance
+    #change security group to prod security group
+    
+    #change EC2 name to Prod server
+    - name: RenameTestEC2Instance
+      run: ./.github/scripts/RenameTestEC2Instance.sh
 
-      - name: Configure AWS-CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+    
+  #Deploy-EC2-PROD:
+  #    needs: Deploy-EC2-TEST
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #    - name: Checkout
+  #      uses: actions/checkout@v3
+
+  #    - name: Configure AWS-CLI
+  #      uses: aws-actions/configure-aws-credentials@v1
+  #      with:
+  #        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #        aws-region: us-east-2
       
-      - name: terminate-All-PROD-Instances
-        run: |
-          export Environment="Prod"
-          ./.github/scripts/TerminateEC2Instances.sh
+  #    - name: terminate-All-PROD-Instances
+  #      run: |
+  #        export Environment="Prod"
+  #        ./.github/scripts/TerminateEC2Instances.sh
 
-      - name: run-LaunchEC2-PROD
-        run: |
-          export Environment="Prod"
-          export SecurityGroup="sg-0329da65af5ecbc8b"
-          ./.github/scripts/LaunchEC2.sh
+  #    - name: run-LaunchEC2-PROD
+  #      run: |
+  #        export Environment="Prod"
+  #        export SecurityGroup="sg-0329da65af5ecbc8b"
+  #        ./.github/scripts/LaunchEC2.sh
