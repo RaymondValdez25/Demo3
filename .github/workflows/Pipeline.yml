@@ -32,27 +32,27 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-2'
 
+    - name: zip-folders-and-push-to-S3
+      run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
+
     - name: terminate-All-TEST-Instances
       run: |
         export Environment="Test"
         ./.github/scripts/TerminateEC2Instances.sh
 
-    - name: zip-folders-and-push-to-S3
-      run: ./.github/scripts/ZipFoldersAndPushToS3.sh 
-      
     - name: run-LaunchEC2-TEST
       run: |
         export Environment="Test"
         export SecurityGroup="sg-0814d306e4384f621"
         ./.github/scripts/LaunchEC2.sh
 
+    - name: export-IP-EC2
+      run: ./.github/scripts/Get-IP.sh
+
     - name: run-a-system-test
       uses: wei/curl@master
       with:
         args: http://${{env.EC2_PUBLIC_IP}}:3000/search?search_string=money
-
-    - name: export-IP-EC2
-      run: ./.github/scripts/Get-IP.sh
 
     - name: export-InstanceID-EC2
       run: ./.github/scripts/Get-InstanceID.sh
