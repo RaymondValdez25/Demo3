@@ -1,6 +1,5 @@
 #!/bin/bash  
 
-sleep 120     
 publicIP=$(aws ec2 describe-instances \
 --region us-east-2 \
 --instance-ids \
