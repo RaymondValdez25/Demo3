@@ -45,19 +45,36 @@ jobs:
         export Environment="Test"
         export SecurityGroup="sg-0814d306e4384f621"
         ./.github/scripts/LaunchEC2.sh
-      
-    - name: get-IP-EC2
-      run: ./.github/scripts/Get-IP.sh
-    
+
     - name: run-a-system-test
       uses: wei/curl@master
       with:
         args: http://${{env.EC2_PUBLIC_IP}}:3000/search?search_string=money
 
+    - name: export-IP-EC2
+      run: ./.github/scripts/Get-IP.sh
+
+    - name: export-InstanceID-EC2
+      run: ./.github/scripts/Get-InstanceID.sh
+      
+
+  PromoteTo-PROD:
+      needs: Deploy-EC2-TEST
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS-CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
 
     #disacociate IP address from old Prod EC2 instance
-    #allocate IP address to new EC2 instance
 
+    #Terminate all PROD Instances
     - name: terminate-All-PROD-Instances
       run: |
         export Environment="Prod"
@@ -65,37 +82,15 @@ jobs:
 
     #change EC2 name to Prod server
     - name: rename-Test-EC2-Instance
-      run: ./.github/scripts/RenameTestEC2Instance.sh
+      run: aws ec2 create-tags --resources ${{env.EC2_INSTANCE_ID}} --tag "Key=Name,Value=Prod_Quote_Server"
 
     #change security group to prod security group
     - name: change-SG-Of-TestInstance
-      run: ./.github/scripts/ChangeSGOfTestInstance.sh
+      run:  | 
+          aws ec2 modify-instance-attribute \
+          --instance-id ${{env.EC2_INSTANCE_ID}} \
+          --groups sg-0329da65af5ecbc8b
 
+    #associate IP address to new EC2 instance
     - name: associate-elastic-IP-to-new-Instance
-      run: aws ec2 associate-address --instance-id ${exported_EC2_ID} --public-ip 3.20.27.183
-
-    
-  #Deploy-EC2-PROD:
-  #    needs: Deploy-EC2-TEST
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #    - name: Checkout
-  #      uses: actions/checkout@v3
-
-  #    - name: Configure AWS-CLI
-  #      uses: aws-actions/configure-aws-credentials@v1
-  #      with:
-  #        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #        aws-region: us-east-2
-      
-  #    - name: terminate-All-PROD-Instances
-  #      run: |
-  #        export Environment="Prod"
-  #        ./.github/scripts/TerminateEC2Instances.sh
-
-  #    - name: run-LaunchEC2-PROD
-  #      run: |
-  #        export Environment="Prod"
-  #        export SecurityGroup="sg-0329da65af5ecbc8b"
-  #        ./.github/scripts/LaunchEC2.sh
+      run: aws ec2 associate-address --instance-id ${{env.EC2_INSTANCE_ID}} --public-ip 3.20.27.183
