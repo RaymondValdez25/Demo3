@@ -74,15 +74,15 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
 
-    - name: export-running-Test-InstanceID-EC2
-      run: |
-        export Environment="Test" 
-        ./.github/scripts/Get-running-InstanceID.sh
+    #- name: export-running-Test-InstanceID-EC2
+    #  run: |
+    #    export Environment="Test" 
+    #    ./.github/scripts/Get-running-InstanceID.sh
 
-    - name: export-running-Test-IP-EC2
-      run: |
-        export Environment="Test"  
-        ./.github/scripts/Get-running-IP.sh
+    #- name: export-running-Test-IP-EC2
+    #  run: |
+    #    export Environment="Test"  
+    #    ./.github/scripts/Get-running-IP.sh
 
     #disacociate IP address from old Prod EC2 instance
 
