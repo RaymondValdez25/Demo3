@@ -55,17 +55,33 @@ jobs:
         args: http://${{env.EC2_PUBLIC_IP}}:3000/search?search_string=money
 
 
-    #disacociate IP address from old EC2 instance
+    #disacociate IP address from old Prod EC2 instance
     #allocate IP address to new EC2 instance
-    #change security group to prod security group
-    
-    #terminate all prod instances
+
+    - name: terminate-All-PROD-Instances
+      run: |
+        export Environment="Prod"
+        ./.github/scripts/TerminateEC2Instances.sh
 
     #change EC2 name to Prod server
-    - name: RenameTestEC2Instance
+    - name: renameTestEC2Instance
       run: ./.github/scripts/RenameTestEC2Instance.sh
 
+    #change security group to prod security group
+    - name: changeSGOfTestInstance
+      run: |
+        EC2_ID=$(aws ec2 describe-instances \
+        --region us-east-2 \
+        --instance-ids \
+        --query Reservations[].Instances[].InstanceId  \
+        --filters Name=tag:Name,Values=Prod_Quote_Server Name=instance-state-name,Values=running,pending \
+        --output=text)
+        aws ec2 modify-instance-attribute \
+        --instance-id $EC2_ID \
+        --groups sg-0329da65af5ecbc8b
     
+    
+
   #Deploy-EC2-PROD:
   #    needs: Deploy-EC2-TEST
   #    runs-on: ubuntu-latest
