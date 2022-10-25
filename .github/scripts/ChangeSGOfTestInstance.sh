@@ -9,3 +9,6 @@ EC2_ID=$(aws ec2 describe-instances \
 aws ec2 modify-instance-attribute \
 --instance-id $EC2_ID \
 --groups sg-0329da65af5ecbc8b
+
+
+echo "EC2_INSTANCE_ID=$EC2_ID" >> $GITHUB_ENV
