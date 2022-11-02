@@ -12,5 +12,6 @@ tar -xf deployment.tar
 #npm install -g node@18.11.0	
 #node -e "console.log('Running Node.js ' + process.version)"
 #npm install pm2@latest -g
+export PATH=$PATH:"/home/ec2-user/.nvm/versions/node/v16.17.0/bin"
 cd ServerSide
 pm2 start server.js
