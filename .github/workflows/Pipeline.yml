@@ -103,4 +103,4 @@ jobs:
           --groups sg-0329da65af5ecbc8b
 
     - name: associate-elastic-IP-to-new-Instance
-      run: aws ec2 associate-address --instance-id ${{env.EC2_INSTANCE_ID}} --public-ip 3.20.27.183
+      run: aws ec2 associate-address --instance-id ${{env.EC2_INSTANCE_ID}} --public-ip 18.119.69.46
