@@ -1,12 +1,16 @@
 #!/bin/bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 aws s3 cp "s3://raymondsdemo3workbucket/deployment.tar.gz" \
 deployment.tar.gz
 gunzip deployment.tar.gz
 tar -xf deployment.tar
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=$PATH:"/home/ec2-user/.nvm/versions/node/v16.17.1/bin"
+
 nvm install --lts
 npm install pm2@latest -g
 cd ServerSide
